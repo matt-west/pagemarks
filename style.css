@@ -4,12 +4,14 @@ body {
 	font-family: Arial;
 	font-size: 13px;
 	color: #565656;
+	overflox-x: hidden;
 }
 
 #popupContainer {
 	width: 350px;
 	min-height: 400px;
 	background: url(bodyBg.png);
+	overflox-x: hidden;
 }
 
 #header {
