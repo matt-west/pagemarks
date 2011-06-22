@@ -17,14 +17,27 @@
       console.log("item " + info.menuItemId + " was clicked");
       console.log("info: " + JSON.stringify(info));
       console.log("tab: " + JSON.stringify(tab));
-
-      url = tab.url;
-      title = tab.title;
       
-      // chrome.tabs.executeScript(null,{code:"alert(document.getSelection())"});
+      var url = tab.url;
+      var title = tab.title;
       
-      // addPageMark(url, title, 0);
-      // console.log("Added PagMark: "+title+" ("+url+")");
+      // Inject the script to handle the message response.
+      chrome.tabs.executeScript(null,{file:"get_selection.js"});
+      
+      // Send a message to the window asking for the position of he selected text
+      chrome.tabs.getSelected(null, function(tab) {
+        chrome.tabs.sendRequest(tab.id, {action: "position"}, function(response) {
+          var position = response.position;
+          
+          if (position != 0) {
+            console.log("Added PagMark: "+title+" ("+url+") at position "+position);
+            addPageMark(url, title, position);
+          } else {
+            // Handle this exception
+          }
+          
+        });
+      });
     }
 
     var title = "Add a PageMark";
