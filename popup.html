@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>PageMarks</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript" src="web_sql_db.js"></script>
+  <script>
+    function newTabWithScroll(tabURL, scrollValue) {
+      // Open the page in a new tab
+      chrome.tabs.create({url: tabURL});
+      // Scroll to the appropriate part of the page
+      chrome.tabs.executeScript(null,{code:"window.scrollBy(0,"+scrollValue+");"});
+    }
+  </script>
+</head>
+<body>
+  <div id="popupContainer">
+    <!-- Header -->
+    <div id="header">
+      PageMarks
+    </div>
+    <!-- END Header -->
+    
+    <script>
+      window.onload = function ()
+      {
+        addPageMark("http://developercity.co.uk/blog", "Developer City Blog", 234);
+        getPageMarks();
+      }
+    </script>
+    
+    <!-- Content -->
+    <div id="content">
+      <!-- Pages List -->
+      <ul id="list">
+      </ul>
+      <!-- END Pages List -->
+    </div>
+    <!-- END Content -->
+  </div>
+</body>
+</html>

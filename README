@@ -2,3 +2,8 @@ PageMarks is an extension for Google Chrome that allows you to save your place i
 The extension is currently under development.
 
 There are plans to add offline support in the future so that you can read pages on the go.
+
+TODO LIST:
+* Add new pagemarks from context menu
+* Delete pagemarks from the popup view
+* Add delete function to database handler
