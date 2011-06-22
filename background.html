@@ -1,0 +1,36 @@
+<html>
+<head>
+  
+</head>
+<body>
+  <script type="text/javascript" src="web_sql_db.js"></script>
+  <script>
+    function noSelect(info, tab) {
+      url = tab.url;
+      title = tab.title;
+      
+      addPageMark(url, title, 0);
+      console.log("Added PagMark: "+title+" ("+url+")");
+    }
+    
+    function select(info, tab) {
+      console.log("item " + info.menuItemId + " was clicked");
+      console.log("info: " + JSON.stringify(info));
+      console.log("tab: " + JSON.stringify(tab));
+
+      url = tab.url;
+      title = tab.title;
+      
+      // chrome.tabs.executeScript(null,{code:"alert(document.getSelection())"});
+      
+      // addPageMark(url, title, 0);
+      // console.log("Added PagMark: "+title+" ("+url+")");
+    }
+
+    var title = "Add a PageMark";
+    chrome.contextMenus.create({"title": title, "contexts":["page"], "onclick": noSelect});
+    chrome.contextMenus.create({"title": title, "contexts":["selection"], "onclick": select});
+  </script>
+  
+</body>
+</html>

@@ -2,16 +2,18 @@
 	"name": "PageMarks",
 	"version": "0.1",
 	"description": "Save your place in a page so that you can finish reading it later.",
+	"background_page": "background.html",
 	"browser_action": {
 		"default_icon":"icon.png",
 		"popup": "popup.html"
 	},
 	"permissions": [
+		"contextMenus",
 		"tabs",
 		"http://*/*",
-		"contextMenus"
+    "https://*/*"
 	],
 	"icons": {
-		"16": "icon.png"
+		"16": "icon-16.png"
 	}
 }

@@ -20,6 +20,11 @@ function getPageMarks() {
 	this.db.transaction(function(tx) {
 		tx.executeSql("SELECT * FROM pagemarks", [], 
 			function(tx, results) {
+				
+				if (results.rows.length == 0) {
+					document.getElementById("list").innerHTML = "<li class='noItems'>You currently have no PageMarks!</li>";
+				}
+				
 		    for (var i = 0; i < results.rows.length; i++) {
 		    	pagemark = results.rows.item(i);
 		    	document.getElementById("list").innerHTML += "<li><a href='"+pagemark.url+"' pre-data='"+pagemark.id+"' onclick='newTabWithScroll(this.href, "+pagemark.scrollValue+")' >"+pagemark.title+"</a></li>";
