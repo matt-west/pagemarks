@@ -3,7 +3,7 @@ function openDB() {
 	this.db.transaction(function(tx) {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS pagemarks(id integer primary key asc, url string, title string, scrollValue float)");
 	});
-	console.log("opened db");
+	// console.log("opened db");
 }
 
 function addPageMark(url, title, scrollValue) {
@@ -11,6 +11,16 @@ function addPageMark(url, title, scrollValue) {
 	
 	this.db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO pagemarks (url, title, scrollValue) values ('"+url+"', '"+title+"', "+scrollValue+")");
+		// console.log("added new pagemark: " + title);
+	});
+}
+
+function deletePageMark(id) {
+	openDB();
+	
+	this.db.transaction(function(tx) {
+		tx.executeSql("DELETE FROM pagemarks WHERE id='"+id+"'");
+		console.log("deleted pagemark: "+id);
 	});
 }
 
@@ -27,7 +37,7 @@ function getPageMarks() {
 				
 		    for (var i = 0; i < results.rows.length; i++) {
 		    	pagemark = results.rows.item(i);
-		    	document.getElementById("list").innerHTML += "<li><a href='"+pagemark.url+"' pre-data='"+pagemark.id+"' onclick='newTabWithScroll(this.href, "+pagemark.scrollValue+")' >"+pagemark.title+"</a></li>";
+		    	document.getElementById("list").innerHTML += "<li><a href='"+pagemark.url+"' pre-data='"+pagemark.id+"' onclick='newTabWithScroll(this.href, "+pagemark.scrollValue+")' >"+pagemark.title+"</a><a href='#' class='deletePM' onclick='deletePM("+pagemark.id+")'>x</a></li>";
 		    }
 		  }, 
 		  function (tx, err) {

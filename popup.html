@@ -10,6 +10,18 @@
       // Scroll to the appropriate part of the page
       chrome.tabs.executeScript(null,{code:"window.scrollBy(0,"+scrollValue+");"});
     }
+    
+    function deletePM(id) {
+      deletePageMark(id);
+      
+      // TODO: Make this more efficient
+      // Clear the list
+      document.getElementById("list").innerHTML = "";
+      // Refresh the elements
+      getPageMarks();
+      
+      return false;
+    }
   </script>
 </head>
 <body>
