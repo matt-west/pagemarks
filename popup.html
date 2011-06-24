@@ -4,11 +4,16 @@
   <link rel="stylesheet" href="style.css" />
   <script type="text/javascript" src="web_sql_db.js"></script>
   <script>
-    function newTabWithScroll(tabURL, scrollValue) {
+    function newTab(tabURL, x, y) {
       // Open the page in a new tab
       chrome.tabs.create({url: tabURL});
-      // Scroll to the appropriate part of the page
-      chrome.tabs.executeScript(null,{code:"window.scrollBy(0,"+scrollValue+");"});
+      
+        // Inject the function that will handle positioning the page
+        // and adding the pagemarker
+        // Execute the scroll function
+        chrome.tabs.executeScript(null,{code:"window.scrollBy(0,"+y+");"});
+        
+        chrome.tabs.executeScript(null,{code:"document.body.innerHTML += '<div class=\"pagemark\" style=\"background: red; position: absolute; left: "+x+"px; top: "+y+"px; height: 16px; width: 16px;\"></div>';"});
     }
     
     function deletePM(id) {

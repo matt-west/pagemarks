@@ -31,12 +31,13 @@ chrome.extension.onRequest.addListener(
 			var box = document.getElementById("pagemark");
 			// Find it's position in the page
 			var y = box.offsetTop;
+			var x = box.offsetLeft;
 
 			// Remove the dummy element
 			dummy.parentNode.removeChild(dummy);
 			
 			// Return the y variable
-			sendResponse({position: y});
+			sendResponse({yCoord: y, xCoord: x});
 			
 		} else {
 		  sendResponse({});
